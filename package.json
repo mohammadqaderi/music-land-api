@@ -30,6 +30,7 @@
     "@nestjs/platform-express": "^7.0.0",
     "@nestjs/platform-fastify": "^7.2.0",
     "@nestjs/platform-socket.io": "^7.2.0",
+    "@nestjs/swagger": "^4.5.12",
     "@nestjs/typeorm": "^7.0.0",
     "@nestjs/websockets": "^7.2.0",
     "@types/passport-local": "^1.0.33",
