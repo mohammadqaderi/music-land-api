@@ -1,0 +1,165 @@
+- Endpoints of music land system:
+- We will use Restful API
+** Auth Endpoints **
+(Auth Controller):
+- localhost:3000/auth --> Root Route (Main-Endpoint - Controller Name)
+
+- localhost:3000/auth/email/register (POST Method)
+- localhost:3000/auth/email/verify/:token  (GET Method)
+- localhost:3000/auth/email/send-verification-request/:email (GET Method)
+- localhost:3000/auth/email/forgot-password/:email (GET Method)
+- localhost:3000/auth/email/reset-password (POST Method)
+- localhost:3000/auth/check-username  (GET Method)
+- localhost:3000/auth/login/user (POST Method)
+- localhost:3000/auth/login/admin (POST Method)
+- localhost:3000/auth/delete-user (DELETE Method)
+- localhost:3000/auth/system-users (GET Method)
+- localhost:3000/auth/current-user  (GET Method)
+- localhost:3000/auth/user-main-data  (GET Method)
+----------------------------------------------------------
+(Email Verification Controller):
+- localhost:3000/verified-emails --> Root Route (GET Method - Main-Endpoint - Controller Name)
+
+- localhost:3000/verified-emails/:email --> (GET Method)
+----------------------------------------------------------
+
+(Forgotten Password Controller):
+
+- localhost:3000/forgotten-passwords --> Root Route (GET Method - Main-Endpoint - Controller Name)
+- localhost:3000/forgotten-passwords/:email --> (GET Method)
+
+
+//////////////////////////////////////////////////////////////////
+
+** Profile Endpoints **
+
+(Profile Controller):
+- localhost:3000/profiles --> Root Route (Main-Endpoint - Controller Name)
+
+- localhost:3000/profiles/user-profile --> (GET Method)
+- localhost:3000/profiles/user-profile/edit --> (PUT Method)
+- localhost:3000/profiles/user-profile/set-profile-image --> (POST Method)
+- localhost:3000/profiles/user-profile/delete-profile-image --> (DELETE Method)
+- localhost:3000/profiles/user-profile/change-profile-image --> (PATCH Method)
+
+//////////////////////////////////////////////////////////////////
+
+** Singer Endpoints **
+
+(Singer Controller):
+- localhost:3000/singers --> Root Route (GET Method - Main-Endpoint - Controller Name)
+- localhost:3000/singers/new-singer --> Root Route (POST Method - Main-Endpoint - Controller Name)
+
+- localhost:3000/singers/limited --> Root Route (GET Method)
+- localhost:3000/singers/filtered --> Root Route (GET Method)
+- localhost:3000/singers/:id -->  (GET Method)
+- localhost:3000/singers/:id/new-album --> (POST Method)
+- localhost:3000/singers/:id/update-singer --> (PUT Method)
+- localhost:3000/singers/:id/delete-singer -->  (DELETE Method)
+
+//////////////////////////////////////////////////////////////////
+
+** Musician Endpoints **
+
+(Musician Controller):
+- localhost:3000/musicians --> Root Route (GET Method - Main-Endpoint - Controller Name)
+- localhost:3000/musicians/new-musician --> Root Route (POST Method - Main-Endpoint - Controller Name)
+
+- localhost:3000/musicians/limited --> Root Route (GET Method)
+- localhost:3000/musicians/filtered --> Root Route (GET Method)
+- localhost:3000/musicians/:id -->  (GET Method)
+- localhost:3000/musicians/:id/new-album --> (POST Method)
+- localhost:3000/musicians/:id/update-musician --> (PUT Method)
+- localhost:3000/musicians/:id/delete-musician -->  (DELETE Method)
+
+//////////////////////////////////////////////////////////////////
+
+** Singer-Album Endpoints **
+
+(Singer-Album Controller):
+- localhost:3000/singer-albums --> Root Route (GET Method - Main-Endpoint - Controller Name)
+- localhost:3000/singer-albums/:id -->  (GET Method)
+- localhost:3000/singer-albums/:id/new-song -->  (POST Method)
+- localhost:3000/singer-albums/:id/update-album -->  (PUT Method)
+- localhost:3000/singer-albums/:id/delete-album -->  (DELETE Method)
+- localhost:3000/singer-albums/:id/clear-album -->  (DELETE Method)
+
+
+//////////////////////////////////////////////////////////////////
+
+
+** Musician-Album Endpoints **
+
+(Musician-Album Controller):
+- localhost:3000/musician-albums --> Root Route (GET Method - Main-Endpoint - Controller Name)
+- localhost:3000/musician-albums/:id -->  (GET Method)
+- localhost:3000/musician-albums/:id/new-music -->  (POST Method)
+- localhost:3000/musician-albums/:id/update-album -->  (PUT Method)
+- localhost:3000/musician-albums/:id/delete-album -->  (DELETE Method)
+- localhost:3000/musician-albums/:id/clear-album -->  (DELETE Method)
+
+
+//////////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////////
+
+
+** Favorite-List Endpoints **
+
+(Favorite-List Controller):
+- localhost:3000/favorite-lists --> Root Route (GET Method - Main-Endpoint - Controller Name)
+- localhost:3000/favorite-lists/:id -->  (GET Method)
+- localhost:3000/favorite-lists/:id/clear-favorite-list -->  (DELETE Method)
+- localhost:3000/favorite-lists/:favoriteId/remove-track-from-favorite-list/:trackId -->  (DELETE Method)
+
+
+//////////////////////////////////////////////////////////////////
+
+** Playlist Endpoints **
+
+(Playlist Controller):
+- localhost:3000/playlists --> Root Route (GET Method - Main-Endpoint - Controller Name)
+- localhost:3000/playlists/:id -->  (GET Method)
+- localhost:3000/playlists/user-play-lists -->  (GET Method)
+- localhost:3000/playlists/new-user-playlist -->  (POST Method)
+- localhost:3000/playlists/:id/update-playlist-->  (PUT Method)
+- localhost:3000/playlists/:id/delete-playlist-->  (DELETE Method)
+- localhost:3000/playlists/:id/clear-playlist-content-->  (DELETE Method)
+- localhost:3000/playlists/:playlistId/remove-track-from-playlist/:trackId -->  (DELETE Method)
+
+
+//////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+** Music Endpoints **
+
+(Music Controller):
+
+- localhost:3000/musics --> Root Route (GET Method - Main-Endpoint - Controller Name)
+- localhost:3000/musics/limited --> Root Route (GET Method)
+- localhost:3000/musics/filtered --> Root Route (GET Method)
+- localhost:3000/musics/:id -->  (GET Method)
+- localhost:3000/musics/:musicId/add-to-playlist/:playlistId -->  (POST Method)
+- localhost:3000/musics/:musicId/save-to-favorite-list/:favoriteId -->  (POST Method)
+- localhost:3000/musics/:id/update-music --> (PUT Method)
+- localhost:3000/musics/:id/delete-music --> Root Route (DELETE Method)
+
+//////////////////////////////////////////////////////////////////
+
+** Song Endpoints **
+
+(Song Controller):
+
+- localhost:3000/songs --> Root Route (GET Method - Main-Endpoint - Controller Name)
+- localhost:3000/songs/limited --> Root Route (GET Method)
+- localhost:3000/songs/filtered --> Root Route (GET Method)
+- localhost:3000/songs/:id -->  (GET Method)
+- localhost:3000/songs/:songId/add-to-playlist/:playlistId -->  (POST Method)
+- localhost:3000/songs/:songId/save-to-favorite-list/:favoriteId -->  (POST Method)
+- localhost:3000/songs/:id/update-song --> (PUT Method)
+- localhost:3000/songs/:id/delete-song --> Root Route (DELETE Method)

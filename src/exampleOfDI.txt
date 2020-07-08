@@ -1,0 +1,65 @@
+
+// without dependency injection
+
+class Dog {
+     name: string;
+     age: number;
+}
+
+class Cat {
+      name: string;
+      age: number;
+      dog: Dog;
+      constructor(){
+        this.dog = new Dog(); // creating instance (object) from Dog class.
+      }
+
+      printDogInfo(){
+        this.dog.name = 'john';
+        this.dog.age = 12;
+        console.log(this.dog.name);
+        console.log(this.dog.age);
+      }
+}
+
+
+
+
+@Injectable()
+export class Dog {
+     name: string;
+     age: number;
+     doSomething(){
+     console.log('hey');
+     }
+}
+
+
+// with dependency injection
+@Injectable()
+export class Cat {
+    constructor(public dogService: Dog){
+
+    }
+      printDogInfo(){
+        this.dog.name = 'john';
+        this.dog.age = 12;
+        console.log(this.dog.name);
+        console.log(this.dog.age);
+      }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
