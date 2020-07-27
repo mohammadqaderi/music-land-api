@@ -4,6 +4,6 @@ import { Controller, Get } from '@nestjs/common';
 export class AppController {
   @Get()
   someTest() {
-    return 'Api is working sucessfully';
+    return 'Api is working successfully';
   }
 }

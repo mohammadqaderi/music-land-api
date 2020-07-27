@@ -6,7 +6,6 @@ import { Playlist } from '../../playlist/playlist.entity';
 import { Message } from '../../../shared/modules/chat/entities/message.entity';
 import { UserJoinedRoom } from '../../../shared/modules/chat/entities/user-joined-room.entity';
 import { Subscriber } from '../../notification/entities/subscriber.entity';
-import { Auth } from '../../../commons/classes/auth';
 
 @Entity('users')
 @Unique(['username', 'email'])

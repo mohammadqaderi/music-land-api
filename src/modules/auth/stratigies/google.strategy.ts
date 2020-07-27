@@ -31,8 +31,8 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
       const jwt = this.authService.generateJwtToken(emails[0].value);
       done(null, { user, jwt });
     } else {
-      const { googleUser, jwt } = await this.authService.SignInGoogle(profile, id);
-      done(null, { googleUser, jwt });
+      const { user, jwt } = await this.authService.SignInGoogle(profile, id);
+      done(null, { user, jwt });
     }
   }
 

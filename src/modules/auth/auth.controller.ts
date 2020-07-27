@@ -7,6 +7,7 @@ import {
   Post,
   Put,
   Req,
+  ParseIntPipe,
   Res,
   UseGuards,
 } from '@nestjs/common';
@@ -37,6 +38,12 @@ export class AuthController {
     return this.authService.signUp(authCredentialsDto, createProfileDto);
   }
 
+  @Get('email/send-email-verification/:email')
+  async sendEmailVerification(@Param('email') email: string) {
+    await this.authService.createEmailToken(email);
+    return this.authService.sendEmailVerification(email);
+  }
+
   @Get('email/verify/:token')
   verifyEmail(@Param('token') token: string) {
     return this.authService.verifyEmail(token);
@@ -53,16 +60,15 @@ export class AuthController {
 
   // related to callback --> redirection to frontend
   @Get('google/callback')
-  @UseGuards(AuthGuard('google'))
+  @UseGuards(AuthGuard(['google']))
   googleLoginCallback(@Req() req, @Res() res) {
-    //destructing jwt token
     const jwt: string = req.user.jwt;
-    console.log(req.user);
+    const {id} = req.user.user;
     if(jwt){
       res
-        .redirect(`http://localhost:4200/login/google/success/userId:${req.user.user.id}/accessToken:${jwt}`);
+        .redirect(`http://localhost:4200/auth/google-success/userId:${id}/accessToken:${jwt}`);
     }else {
-      res.redirect('http://localhost:4200/login/google/failure')
+      res.redirect('http://localhost:4200/auth/google-failure');
     }
   }
 
@@ -76,20 +82,19 @@ export class AuthController {
   @Get('facebook/callback')
   @UseGuards(AuthGuard('facebook'))
   facebookLoginCallback(@Req() req, @Res() res) {
-    //destructing jwt token
     const jwt: string = req.user.jwt;
-    console.log(req.user);
+    const {id} = req.user.user;
     if(jwt){
       res
-        .redirect(`http://localhost:4200/login/facebook/success/userId:${req.user.user.id}/accessToken:${jwt}`);
+        .redirect(`http://localhost:4200/auth/facebook-success/userId:${id}/accessToken:${jwt}`);
     }else {
-      res.redirect('http://localhost:4200/login/facebook/failure')
+      res.redirect('http://localhost:4200/auth/facebook-failure')
     }
   }
 
 
   @Post('login/user')
-  signInUser(@Body('emailLoginDto') emailLoginDto: EmailLoginDto) {
+  signInUser(@Body() emailLoginDto: EmailLoginDto) {
     return this.authService.signInUser(emailLoginDto);
   }
 
@@ -134,6 +139,11 @@ export class AuthController {
   @Roles([Role.ADMIN])
   getSystemUsers() {
     return this.authService.getSystemUsers();
+  }
+
+  @Get('users/:id')
+  getUserById(@Param('id', ParseIntPipe) id: number) {
+    return this.authService.getUserById(id);
   }
 
   @Put('edit-user-roles/:userId')

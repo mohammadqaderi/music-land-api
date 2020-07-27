@@ -31,9 +31,8 @@ export class FacebookStrategy extends PassportStrategy(Strategy, 'facebook') {
       const jwt = this.authService.generateJwtToken(emails[0].value);
       done(null, { user, jwt });
     } else {
-      console.log(profile);
-      const { facebookUser, jwt } = await this.authService.SingInFacebook(profile, id);
-      done(null, { facebookUser, jwt });
+      const { user, jwt } = await this.authService.SingInFacebook(profile, id);
+      done(null, { user, jwt });
     }
   }
 

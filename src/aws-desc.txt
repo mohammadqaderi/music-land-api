@@ -2,5 +2,5 @@
     AWS_S3_BUCKET_NAME: 'AWS_S3_BUCKET_NAME',
     Access_Key_ID: 'Access_Key_ID',
     Secret_Access_Key: 'Secret_Access_Key',
-    cdnUrl: 'https://music-land.s3.us-east-2.amazonaws.com',
+    cdnUrl: 'cdnUrl',
   },

@@ -31,8 +31,9 @@ export class AwsService {
       });
     });
   }
-  async fileDelete(filename: string): Promise<any> {
 
+
+  async fileDelete(filename: string): Promise<any> {
     return new Promise((resolve, reject) => {
       const params: AWS.S3.DeleteObjectRequest = {
         Bucket: 'music-land',

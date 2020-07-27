@@ -17,7 +17,9 @@ export class Subscriber extends BaseEntity{
   @Column('simple-json')
   keys: Key;
 
-  @OneToOne(type => User, user => user.subscriber)
+  @OneToOne(type => User, user => user.subscriber, {
+   eager: true
+  })
   user: User;
 
   @OneToMany(type => SubscribersNotifications,

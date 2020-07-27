@@ -97,7 +97,6 @@ export class SingerService {
     return result;
   }
 
-  // implementation later
   async createNewAlbum(singerId: number, createAlbumDto: CreateAlbumDto): Promise<SingerAlbum> {
     const singer = await this.getSingerById(singerId);
     const singerAlbum = new SingerAlbum();

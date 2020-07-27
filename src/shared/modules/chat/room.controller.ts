@@ -3,7 +3,6 @@ import {
   Controller,
   Delete,
   Get,
-  NotFoundException,
   Param,
   ParseIntPipe,
   Post,
@@ -14,11 +13,6 @@ import { AuthGuard } from '@nestjs/passport';
 import { UserAuthGuard } from '../../../commons/guards/user-auth.guard';
 import { Roles } from '../../../commons/decorators/roles.decorator';
 import { Role } from '../../../commons/enums/role.enum';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Room } from './entities/room.entity';
-import { Repository } from 'typeorm';
-import { Message } from './entities/message.entity';
-import { UserJoinedRoom } from './entities/user-joined-room.entity';
 import { GetAuthenticatedUser } from '../../../commons/decorators/get-authenticated-user.decorator';
 import { User } from '../../../modules/auth/entities/user.entity';
 import { RoomDto } from './dto/room.dto';

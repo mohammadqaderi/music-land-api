@@ -10,7 +10,7 @@ import { NotificationPayload } from './classes/notification-payload';
 import { Notification } from './classes/notification';
 import { NotificationData } from './classes/notification-data';
 import { NotificationEntity } from './entities/notification.entity';
-
+import { v4 as uuidv4 } from 'uuid';
 @Injectable()
 export class NotificationService {
   constructor(@InjectRepository(Subscriber) private subscriberRepository: Repository<Subscriber>,
@@ -46,7 +46,7 @@ export class NotificationService {
     }
   }
 
-  async newSubscriber(user: User, sub: any): Promise<User> {
+  async newSubscriber(user: User, sub: any): Promise<Subscriber> {
     const { endpoint, expirationTime, keys } = sub;
     const subscriber = new Subscriber();
     subscriber.user = user;
@@ -54,10 +54,9 @@ export class NotificationService {
     subscriber.endpoint = endpoint;
     subscriber.expirationTime = expirationTime;
     subscriber.subscribersNotifications = [];
-    user.subscriber = await subscriber.save();// creation of foreign key
-    await user.save();
-    return user;
+    return await subscriber.save();
   }
+
 
   async sendNewNotification(notificationPayloadDto: NotificationPayloadDto): Promise<void> {
     const { title, body } = notificationPayloadDto;
@@ -77,9 +76,9 @@ export class NotificationService {
     ];
     notificationPayload.notification.data = new NotificationData();
     notificationPayload.notification.data.dateOfArrival = new Date(Date.now());
-    notificationPayload.notification.data.primaryKey = 1;
+    notificationPayload.notification.data.primaryKey = uuidv4();
     notificationPayload.notification.icon =
-      'https://songs-static.s3.us-east-2/amazonaws.com/main-page-logo-small-hat.png';
+      'https://songs-static.s3.us-east-2.amazonaws.com/main-page-logo-small-hat.png';
     notificationPayload.notification.vibrate = [100, 50, 100];
     const subscribers = await this.getAllSubscribers();
     const notification = await this.createNotification(title, body);

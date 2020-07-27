@@ -78,24 +78,24 @@ export class AuthService {
 
 
   /*                  Social Methods                   */
-  async SignInGoogle(profile: any, googleId: string): Promise<{ googleUser: User, jwt: string }> {
+  async SignInGoogle(profile: any, googleId: string): Promise<{ user: User, jwt: string }> {
     const { emails } = profile;
-    let user = new User();
-    user.googleId = googleId;
-    user = await this.setUserInfo(user, profile);
+    let googleUser = new User();
+    googleUser.googleId = googleId;
+    googleUser = await this.setUserInfo(googleUser, profile);
     const jwt = this.generateJwtToken(emails[0].value);
-    const googleUser = await user.save();
-    return { googleUser, jwt };
+    const user = await googleUser.save();
+    return { user, jwt };
   }
 
-  async SingInFacebook(profile: any, facebookId: string): Promise<{ facebookUser: User, jwt: string }> {
+  async SingInFacebook(profile: any, facebookId: string): Promise<{ user: User, jwt: string }> {
     const { emails } = profile;
-    let user = new User();
-    user.facebookId = facebookId;
-    user = await this.setUserInfo(user, profile);
+    let facebookUser = new User();
+    facebookUser.facebookId = facebookId;
+    facebookUser = await this.setUserInfo(facebookUser, profile);
     const jwt = this.generateJwtToken(emails[0].value);
-    const facebookUser = await user.save();
-    return { facebookUser, jwt };
+    const user = await facebookUser.save();
+    return { user, jwt };
   }
 
 

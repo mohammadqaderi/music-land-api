@@ -1,10 +1,9 @@
-import { Body, Delete, Get, Injectable, NotFoundException, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
+import {Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Room } from './entities/room.entity';
 import { Repository } from 'typeorm';
 import { Message } from './entities/message.entity';
 import { UserJoinedRoom } from './entities/user-joined-room.entity';
-import { GetAuthenticatedUser } from '../../../commons/decorators/get-authenticated-user.decorator';
 import { User } from '../../../modules/auth/entities/user.entity';
 import { RoomDto } from './dto/room.dto';
 
@@ -23,7 +22,7 @@ export class ChatService {
     return this.roomRepository.find();
   }
 
-  async getRoomById(@Param('id', ParseIntPipe) id: number) {
+  async getRoomById(id: number) {
     const room = await this.roomRepository.findOne({
       where: { id },
     });
@@ -46,7 +45,7 @@ export class ChatService {
   }
 
 
-  async getUserRooms(@GetAuthenticatedUser() user: User) {
+  async getUserRooms(user: User) {
     const query = this.roomRepository.createQueryBuilder('room');
     query.select()
       .where('room.createdBy LIKE :username', { username: user.username });
@@ -54,8 +53,8 @@ export class ChatService {
     return rooms;
   }
 
-  async createNewRoom(@GetAuthenticatedUser() user: User,
-                      @Body() createRoomDto: RoomDto) {
+  async createNewRoom(user: User,
+                      createRoomDto: RoomDto) {
     const { name } = createRoomDto;
     const room = new Room();
     room.name = name;
@@ -65,8 +64,8 @@ export class ChatService {
     return await room.save();
   }
 
-  async updateRoom(@Param('id', ParseIntPipe) id: number,
-                   @Body() updateRoomDto: RoomDto) {
+  async updateRoom(id: number,
+                   updateRoomDto: RoomDto) {
     const { name } = updateRoomDto;
     const room = await this.getRoomById(id);
     if (name) {
@@ -75,7 +74,7 @@ export class ChatService {
     return await room.save();
   }
 
-  async deleteRoom(@Param('id', ParseIntPipe) id: number) {
+  async deleteRoom(id: number) {
     const room = await this.getRoomById(id);
     for (let i = 0; i < room.messages.length; i++) {
       await this.messageRepository.delete(room.messages[i].id);
