@@ -46,7 +46,7 @@ export class MusicController {
 
 
   @Get(':id')
-  private getMusicById(@Param('id') id: number) {
+   getMusicById(@Param('id', ParseIntPipe) id: number) {
     return this.musicService.getMusicById(id);
   }
 
@@ -57,7 +57,7 @@ export class MusicController {
   @UseGuards(AuthGuard(), AdminAuthGuard)
   @Roles([Role.ADMIN])
   @UseInterceptors(FileInterceptor('source'))
-  updateMusic(@Param('id') id: number,
+  updateMusic(@Param('id', ParseIntPipe) id: number,
               @Body('name') name: string,
               @Body('description') description: string,
               @Body('artist') artist: string,
@@ -69,15 +69,15 @@ export class MusicController {
   @Delete(':id/delete-music')
   @UseGuards(AuthGuard(), AdminAuthGuard)
   @Roles([Role.ADMIN])
-  delete(@Param('id') id: number) {
+  delete(@Param('id', ParseIntPipe) id: number) {
     return this.musicService.deleteMusic(id);
   }
 
   @Post(':musicId/add-to-playlist/:playlistId')
   @UseGuards(AuthGuard(), UserAuthGuard)
   @Roles([Role.USER])
-  addToPlaylist(@Param('musicId') musicId: number,
-                @Param('playlistId') playlistId: number) {
+  addToPlaylist(@Param('musicId', ParseIntPipe) musicId: number,
+                @Param('playlistId', ParseIntPipe) playlistId: number) {
     return this.musicService.pushToPlaylist(musicId, playlistId);
   }
 

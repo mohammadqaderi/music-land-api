@@ -1,4 +1,4 @@
-import { Controller, Delete, Get, Param, UseGuards } from '@nestjs/common';
+import { Controller, Delete, Get, Param, ParseIntPipe, UseGuards } from '@nestjs/common';
 import { FavoriteService } from './favorite.service';
 import { AuthGuard } from '@nestjs/passport';
 import { Roles } from '../../commons/decorators/roles.decorator';
@@ -14,7 +14,7 @@ export class FavoriteController {
   }
 
   @Get(':id')
-  getUserFavoriteList(@Param('id') id: number) {
+  getUserFavoriteList(@Param('id', ParseIntPipe) id: number) {
     return this.favoriteListService.getUserFavoriteList(id);
   }
 
@@ -24,13 +24,13 @@ export class FavoriteController {
   * */
 
   @Delete(':id/clear-favorite-list')
-  clearFavoriteList(@Param('id') id: number) {
+  clearFavoriteList(@Param('id', ParseIntPipe) id: number) {
     return this.favoriteListService.clearFavoriteListContent(id);
   }
 
   @Delete(':favoriteId/remove-track-from-favorite-list/:trackId')
-  removeTrackFromFavoriteList(@Param('favoriteId') favoriteId: number,
-                              @Param('trackId') trackId: number) {
-    return this.favoriteListService.removeTrackFromFavoriteList(favoriteId, trackId);
+  removeTrackFromFavoriteList(@Param('favoriteId', ParseIntPipe) favoriteId: number,
+                              @Param('trackId', ParseIntPipe) trackId: number) {
+    return this.favoriteListService.removeTrackFromFavouriteList(favoriteId, trackId);
   }
 }

@@ -20,11 +20,11 @@ export class MusicService {
   }
 
   async getAllMusics(): Promise<Music[]> {
-    return this.musicRepository.find();
+    return await this.musicRepository.find();
   }
 
   async getMusicById(id: number): Promise<Music> {
-    const music = this.musicRepository.findOne({
+    const music = await this.musicRepository.findOne({
       where: {
         id,
       },
@@ -37,12 +37,12 @@ export class MusicService {
 
   async getFilteredMusics(limit: number,
                           type: MusicType, rate: number): Promise<Music[]> {
-    return this.musicRepository.getFilteredMusics(limit, type, rate);
+    return await this.musicRepository.getFilteredMusics(limit, type, rate);
   }
 
 
   async getLimitedMusics(limit: number): Promise<Music[]> {
-    return this.musicRepository.getLimitedMusics(limit);
+    return await this.musicRepository.getLimitedMusics(limit);
   }
 
   async updateMusic(id: number, name: string, description: string,

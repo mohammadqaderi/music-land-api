@@ -11,6 +11,7 @@ import { Notification } from './classes/notification';
 import { NotificationData } from './classes/notification-data';
 import { NotificationEntity } from './entities/notification.entity';
 import { v4 as uuidv4 } from 'uuid';
+
 @Injectable()
 export class NotificationService {
   constructor(@InjectRepository(Subscriber) private subscriberRepository: Repository<Subscriber>,
@@ -32,6 +33,11 @@ export class NotificationService {
       throw new NotFoundException(`Subscriber with Id ${id} does not found`);
     }
     return subscriber;
+  }
+
+  async getSubscriberNotifications(id: number): Promise<SubscribersNotifications[]> {
+    const subscriber = await this.getSubscriberById(id);
+    return subscriber.subscribersNotifications;
   }
 
   async deleteSubscriber(id: number): Promise<void> {
@@ -84,7 +90,7 @@ export class NotificationService {
     const notification = await this.createNotification(title, body);
     for (let i = 0; i < subscribers.length; i++) {
       await this.createSubscriberNotification(
-        notificationPayload,notification,subscribers[i]
+        notificationPayload, notification, subscribers[i],
       );
       await webPush.sendNotification(subscribers[i], JSON.stringify(notificationPayload));
     }

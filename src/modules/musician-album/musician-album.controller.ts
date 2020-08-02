@@ -3,7 +3,7 @@ import {
   Controller,
   Delete,
   Get,
-  Param,
+  Param, ParseIntPipe,
   Post,
   Put,
   UploadedFile,
@@ -28,7 +28,7 @@ export class MusicianAlbumController {
   }
 
   @Get(':id')
-  getMusicianAlbum(@Param('id') id: number) {
+  getMusicianAlbum(@Param('id', ParseIntPipe) id: number) {
     return this.musicianAlbumService.getMusicianAlbumById(id);
   }
 
@@ -36,7 +36,7 @@ export class MusicianAlbumController {
   @UseGuards(AuthGuard(), AdminAuthGuard)
   @Roles([Role.ADMIN])
   @UseInterceptors(FileInterceptor('source'))
-  createNewMusic(@Param('id') id: number,
+  createNewMusic(@Param('id', ParseIntPipe) id: number,
               @Body('name') name: string,
               @Body('description') description: string,
               @Body('artist') artist: string,
@@ -48,14 +48,14 @@ export class MusicianAlbumController {
   @Put(':id/update-album')
   @UseGuards(AuthGuard(), AdminAuthGuard)
   @Roles([Role.ADMIN])
-  updateAlbum(@Param('id') id: number, @Body() createAlbumDto: CreateAlbumDto){
+  updateAlbum(@Param('id', ParseIntPipe) id: number, @Body() createAlbumDto: CreateAlbumDto){
    return this.musicianAlbumService.updateMusicianAlbum(id, createAlbumDto);
   }
 
   @Delete(':id/delete-album')
   @UseGuards(AuthGuard(), AdminAuthGuard)
   @Roles([Role.ADMIN])
-  deleteAlbum(@Param('id') id: number){
+  deleteAlbum(@Param('id', ParseIntPipe) id: number){
     return this.musicianAlbumService.deleteMusicianAlbum(id);
   }
 }

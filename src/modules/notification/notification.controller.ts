@@ -8,6 +8,7 @@ import { GetAuthenticatedUser } from '../../commons/decorators/get-authenticated
 import { User } from '../auth/entities/user.entity';
 import { NotificationPayloadDto } from './notification-payload.dto';
 import { NotificationService } from './notification.service';
+import { UserAuthGuard } from '../../commons/guards/user-auth.guard';
 
 @Controller('notifications')
 export class NotificationController {
@@ -22,6 +23,18 @@ export class NotificationController {
     return this.notificationService.getAllSubscribers();
   }
 
+  @Get('subscribers/subscriber-notifications')
+  @UseGuards(AuthGuard(), UserAuthGuard)
+  @Roles([Role.ADMIN, Role.USER])
+  getSubscriberNotifications(@GetAuthenticatedUser() user: User) {
+    console.log(user);
+    if (user.subscriberId) {
+      return this.notificationService.getSubscriberNotifications(user.subscriberId);
+    } else {
+      return null;
+    }
+  }
+
   @Get('subscribers/:id')
   @UseGuards(AuthGuard(), AcceptedAuthGuard)
   @Roles([Role.ADMIN, Role.USER])
@@ -29,9 +42,10 @@ export class NotificationController {
     return this.notificationService.getSubscriberById(id);
   }
 
+
   @Post('subscribers/new')
-  @UseGuards(AuthGuard(), AdminAuthGuard)
-  @Roles([Role.ADMIN])
+  @UseGuards(AuthGuard(), AcceptedAuthGuard)
+  @Roles([Role.ADMIN, Role.USER])
   newSubscriber(@GetAuthenticatedUser() user: User, @Body() subscriber: any) {
     return this.notificationService.newSubscriber(user, subscriber);
   }

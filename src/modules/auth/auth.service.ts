@@ -410,17 +410,9 @@ export class AuthService {
     if (id) {
       user = await this.getUserById(id);
     } else if (nickname) {
-      user = await this.userRepository.findOne({
-        where: {
-          username: nickname,
-        },
-      });
+      user = await this.userRepository.findOne({ username: nickname });
     } else if (clientId) {
-      user = await this.userRepository.findOne({
-        where: {
-          clientId,
-        },
-      });
+      user = await this.userRepository.findOne({ clientId });
     } else {
       throw new NotFoundException(`User with Id ${id} Does not found`);
     }

@@ -47,11 +47,14 @@ export class FavoriteService {
     return await favorite.save();
   }
 
-  async removeTrackFromFavoriteList(favoriteId: number, trackId: number): Promise<void> {
-    const favorite = await this.getUserFavoriteList(favoriteId);
+  async removeTrackFromFavouriteList(favouriteId: number, trackId: number): Promise<void> {
+    const favorite = await this.getUserFavoriteList(favouriteId);
     for (let i = 0; i < favorite.tracks.length; i++) {
-      if (favorite.tracks[i].id === trackId) {
-        await this.trackService.deleteTrack(trackId);
+      if (trackId === favorite.tracks[i].id) {
+        await this.trackService.deleteTrack(
+          trackId,
+        );
+        break;
       }
     }
   }

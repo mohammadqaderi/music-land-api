@@ -10,7 +10,7 @@ import {
   UploadedFile,
   UseGuards,
   UseInterceptors,
-  ParseIntPipe
+  ParseIntPipe,
 } from '@nestjs/common';
 import { SongLanguage } from '../../commons/enums/song-language.enum';
 import { SongType } from '../../commons/enums/song-type.enum';
@@ -48,17 +48,16 @@ export class SongController {
   }
 
   @Get(':id')
-  getSongById(@Param('id') id: number) {
+  getSongById(@Param('id', ParseIntPipe) id: number) {
     return this.songService.getSongById(id);
   }
-
 
 
   @Put(':id/update-song')
   @UseGuards(AuthGuard(), AdminAuthGuard)
   @Roles([Role.ADMIN])
   @UseInterceptors(FileInterceptor('source'))
-  updateSong(@Param('id') id: number,
+  updateSong(@Param('id', ParseIntPipe) id: number,
              @Body('name') name: string,
              @Body('description') description: string,
              @Body('artist') artist: string,
@@ -72,23 +71,23 @@ export class SongController {
   @Delete(':id/delete-song')
   @UseGuards(AuthGuard(), AdminAuthGuard)
   @Roles([Role.ADMIN])
-  delete(@Param('id') id: number) {
+  delete(@Param('id', ParseIntPipe) id: number) {
     return this.songService.deleteSong(id);
   }
 
   @Post(':songId/add-to-playlist/:playlistId')
   @UseGuards(AuthGuard(), UserAuthGuard)
   @Roles([Role.USER])
-  addToPlaylist(@Param('songId') songId: number,
-                @Param('playlistId') playlistId: number) {
+  addToPlaylist(@Param('songId', ParseIntPipe) songId: number,
+                @Param('playlistId', ParseIntPipe) playlistId: number) {
     return this.songService.pushToPlaylist(songId, playlistId);
   }
 
   @Post(':songId/save-to-favorite-list/:favoriteId')
   @UseGuards(AuthGuard(), UserAuthGuard)
   @Roles([Role.USER])
-  saveToFavoriteList(@Param('songId') songId: number,
-                     @Param('favoriteId') favoriteId: number) {
+  saveToFavoriteList(@Param('songId', ParseIntPipe) songId: number,
+                     @Param('favoriteId', ParseIntPipe) favoriteId: number) {
     return this.songService.pushToFavoriteList(songId, favoriteId);
   }
 }

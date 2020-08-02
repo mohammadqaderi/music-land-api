@@ -63,11 +63,11 @@ export class AuthController {
   @UseGuards(AuthGuard(['google']))
   googleLoginCallback(@Req() req, @Res() res) {
     const jwt: string = req.user.jwt;
-    const {id} = req.user.user;
-    if(jwt){
+    const { id } = req.user.user;
+    if (jwt) {
       res
         .redirect(`http://localhost:4200/auth/google-success/userId:${id}/accessToken:${jwt}`);
-    }else {
+    } else {
       res.redirect('http://localhost:4200/auth/google-failure');
     }
   }
@@ -83,12 +83,12 @@ export class AuthController {
   @UseGuards(AuthGuard('facebook'))
   facebookLoginCallback(@Req() req, @Res() res) {
     const jwt: string = req.user.jwt;
-    const {id} = req.user.user;
-    if(jwt){
+    const { id } = req.user.user;
+    if (jwt) {
       res
         .redirect(`http://localhost:4200/auth/facebook-success/userId:${id}/accessToken:${jwt}`);
-    }else {
-      res.redirect('http://localhost:4200/auth/facebook-failure')
+    } else {
+      res.redirect('http://localhost:4200/auth/facebook-failure');
     }
   }
 
@@ -149,7 +149,7 @@ export class AuthController {
   @Put('edit-user-roles/:userId')
   @UseGuards(AuthGuard(), AdminAuthGuard)
   @Roles([Role.ADMIN])
-  editUserRoles(@Param('userId') userId: number, @Body() roles: Role[]) {
+  editUserRoles(@Param('userId', ParseIntPipe) userId: number, @Body() roles: Role[]) {
     return this.authService.editUserRoles(userId, roles);
   }
 

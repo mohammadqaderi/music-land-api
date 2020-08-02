@@ -37,6 +37,7 @@ export class ProfileService {
     const { firstName, lastName, phone, age, address, city, country, gender }
       = createProfileDto;
     if (firstName) {
+    console.log(firstName);
       profile.firstName = firstName;
     }
     if (lastName) {
@@ -57,7 +58,7 @@ export class ProfileService {
     if (country) {
       profile.country = country;
     }
-    if (firstName) {
+    if (gender) {
       profile.gender = gender;
     }
     const savedProfile = await profile.save();

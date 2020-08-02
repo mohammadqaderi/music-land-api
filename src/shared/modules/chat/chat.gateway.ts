@@ -58,7 +58,9 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
     // Notify when the user disconnected and has leaved
     if (client && client.id) {
       const user = await this.authService.findUser(null, null, client.id);
+      if(user){
       client.server.emit('users-changed', { user: user.username, event: 'left' });
+      }
     }
 
   }
@@ -124,6 +126,7 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
     const msg = new Message();
     msg.text = text;
     msg.user = user;
+    msg.sender = user.username;
     msg.room = room;
     msg.roomName = room.name;
     msg.created = new Date();

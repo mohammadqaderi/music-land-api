@@ -1,10 +1,10 @@
 export const config = {
   db: {
     type: 'postgres',
-    host: 'localhost',
+    host: 'host',
     port: 5432,
     database: 'music-land',
-    username: 'username',
+    username: 'mohammad',
     password: 'password',
     entities: [__dirname + '/**/*.entity{.ts,.js}'],
     synchronize: true,

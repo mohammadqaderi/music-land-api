@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UseGuards } from '@nestjs/common';
 import { GetAuthenticatedUser } from '../../commons/decorators/get-authenticated-user.decorator';
 import { User } from '../auth/entities/user.entity';
 import { AuthGuard } from '@nestjs/passport';
@@ -22,7 +22,7 @@ export class PlaylistController {
   }
 
   @Get(':id')
-  getPlaylist(@Param('id') id: number) {
+  getPlaylist(@Param('id', ParseIntPipe) id: number) {
     return this.playlistService.getPlaylistById(id);
 
   }
@@ -33,26 +33,26 @@ export class PlaylistController {
   }
 
   @Put(':id/update-playlist')
-  updatePlaylist(@Param('id') id: number, @Body() playlistDto: PlaylistDto) {
+  updatePlaylist(@Param('id', ParseIntPipe) id: number, @Body() playlistDto: PlaylistDto) {
     return this.playlistService.updatePlaylist(id, playlistDto);
 
   }
 
   @Delete(':id/delete-playlist')
-  deletePlaylist(@Param('id') id: number) {
+  deletePlaylist(@Param('id', ParseIntPipe) id: number) {
     return this.playlistService.deletePlaylist(id);
   }
 
 
 
   @Delete(':id/clear-playlist')
-  clearPlaylistContent(@Param('id') id: number) {
+  clearPlaylistContent(@Param('id', ParseIntPipe) id: number) {
     return this.playlistService.clearPlaylistContent(id);
   }
 
   @Delete(':playlistId/remove-track-from-playlist/:trackId')
-  removeTrackFromFavoriteList(@Param('playlistId') playlistId: number,
-                              @Param('trackId') trackId: number) {
+  removeTrackFromFavoriteList(@Param('playlistId', ParseIntPipe) playlistId: number,
+                              @Param('trackId', ParseIntPipe) trackId: number) {
     return this.playlistService.removeTrackFromPlaylist(playlistId, trackId);
 
   }
