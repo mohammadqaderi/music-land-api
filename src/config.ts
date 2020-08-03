@@ -1,19 +1,19 @@
 export const config = {
   db: {
     type: 'postgres',
-    host: 'host',
+    host: 'music-land.clwaq40esgxk.us-east-2.rds.amazonaws.com',
     port: 5432,
     database: 'music-land',
     username: 'mohammad',
-    password: 'password',
+    password: '633802asdASD',
     entities: [__dirname + '/**/*.entity{.ts,.js}'],
     synchronize: true,
   },
   aws: {
-    AWS_S3_BUCKET_NAME: 'AWS_S3_BUCKET_NAME',
-    ACCESS_KEY_ID: 'ACCESS_KEY_ID',
-    SECRET_ACCESS_KEY: 'SECRET_ACCESS_KEY',
-    cdnUrl: 'cdnUrl',
+    AWS_S3_BUCKET_NAME: 'music-land',
+    ACCESS_KEY_ID: 'AKIAI74L3YS6JQG6LWBQ',
+    SECRET_ACCESS_KEY: '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',
+    cdnUrl: 'https://music-land.s3.us-east-2.amazonaws.com',
   },
   nodeMailerOptions: {
     transport: {
@@ -21,8 +21,8 @@ export const config = {
       port: 465,
       secure: true,
       auth: {
-        username: 'username',
-        pass: 'pass',
+        username: 'mqaderi44@gmail.com',
+        pass: '12345678asd',
       },
       tls: {
         rejectUnauthorized: false,
@@ -37,21 +37,21 @@ export const config = {
 
 
   vapidKeys: {
-    publicKey: 'publicKey',
-    privateKey: 'privateKey'
+    publicKey: 'BLpySO99jzI6h9LHBavAlH7rYkifZtx68A6YZFbfu14eWhP-RMPkzP13qWY82BGDsS6i_NFCS16-NlE1TnL9jc4',
+    privateKey: '7JvOwUHBIzOl7vH91umiMQqISDkY3EP9ym_NUsecW44'
   },
 
   oAuthGoogle: {
-    GOOGLE_CLIENT_ID: 'GOOGLE_CLIENT_ID',
-    GOOGLE_CLIENT_SECRET: 'GOOGLE_CLIENT_SECRET',
-    CALL_BACK_URI: 'http://localhost:3000/auth/google/callback',
+    GOOGLE_CLIENT_ID: '489272575762-vca6inkq37bqapfpsn4l3u3qpn8rbig4.apps.googleusercontent.com',
+    GOOGLE_CLIENT_SECRET: 'iALijCcKEcXgSxfp_RchkQu7',
+    CALL_BACK_URI: 'https://music-land-api.herokuapp.com/auth/google/callback',
     SCOPE: ['email', 'profile'],
   },
 
   oAuthFacebook: {
-    FACEBOOK_CLIENT_ID: 'FACEBOOK_CLIENT_ID',
-    FACEBOOK_SECRET_ID: 'FACEBOOK_SECRET_ID',
-    CALL_BACK_URI: 'http://localhost:3000/auth/facebook/callback',
+    FACEBOOK_CLIENT_ID: '321927035491005',
+    FACEBOOK_SECRET_ID: '4cee40e6f3f3d56840e8e8f6dc0367d0',
+    CALL_BACK_URI: 'https://music-land-api.herokuapp.com/auth/facebook/callback',
     SCOPE: ['email'],
   }
 

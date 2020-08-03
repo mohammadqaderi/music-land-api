@@ -25,9 +25,8 @@ export class NotificationController {
 
   @Get('subscribers/subscriber-notifications')
   @UseGuards(AuthGuard(), UserAuthGuard)
-  @Roles([Role.ADMIN, Role.USER])
+  @Roles([Role.USER])
   getSubscriberNotifications(@GetAuthenticatedUser() user: User) {
-    console.log(user);
     if (user.subscriberId) {
       return this.notificationService.getSubscriberNotifications(user.subscriberId);
     } else {
