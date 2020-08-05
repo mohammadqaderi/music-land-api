@@ -22,7 +22,7 @@ export const config = {
       secure: true,
       auth: {
         username: 'mqaderi44@gmail.com',
-        pass: '12345678asd',
+        pass: '633802asdASDasd',
       },
       tls: {
         rejectUnauthorized: false,
