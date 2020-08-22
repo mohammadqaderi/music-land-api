@@ -31,8 +31,8 @@ import { AppController } from './app.controller';
           port: 465,
           secure: true,
           auth: {
-            user: 'mqaderi44@gmail.com',
-            pass: '633802asdASDasd',
+            user: 'user',
+            pass: 'pass',
           },
           tls: {
             rejectUnauthorized: false,

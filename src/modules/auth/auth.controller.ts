@@ -66,9 +66,9 @@ export class AuthController {
     const { id } = req.user.user;
     if (jwt) {
       res
-        .redirect(`https://music-land.herokuapp.com/auth/google-success/userId:${id}/accessToken:${jwt}`);
+        .redirect(`http://localhost:4200/auth/google-success/userId:${id}/accessToken:${jwt}`);
     } else {
-      res.redirect('https://music-land.herokuapp.com/auth/google-failure');
+      res.redirect('http://localhost:4200/auth/google-failure');
     }
   }
 
@@ -86,9 +86,9 @@ export class AuthController {
     const { id } = req.user.user;
     if (jwt) {
       res
-        .redirect(`https://music-land.herokuapp.com/auth/facebook-success/userId:${id}/accessToken:${jwt}`);
+        .redirect(`http://localhost:4200/auth/facebook-success/userId:${id}/accessToken:${jwt}`);
     } else {
-      res.redirect('https://music-land.herokuapp.com/auth/facebook-failure');
+      res.redirect('http://localhost:4200/auth/facebook-failure');
     }
   }
 

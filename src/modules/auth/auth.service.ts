@@ -124,23 +124,21 @@ export class AuthService {
   }
 
 
-  async getUserMainData(user: User): Promise<{ user: User, profile: Profile, favorite: Favorite }> {
+  async getUserMainData(user: User): Promise<{ user: User, profile: Profile }> {
     const profile = await this.profileService.getProfileData(user);
-    const favorite = await this.favoriteService.getUserFavoriteList(profile.favoriteId);
     return {
       user,
       profile,
-      favorite,
     };
   }
 
-  async signInUser(emailLoginDto: EmailLoginDto): Promise<{ accessToken: string, user: User }> {
+  async signInUser(emailLoginDto: EmailLoginDto): Promise<{token: string}> {
     if (!(await this.isValidEmail(emailLoginDto.email))) {
       throw new BadRequestException('Invalid Email Signature');
     }
     const { email, user } = await this.userRepository.validateUserPassword(emailLoginDto);
-    const accessToken = this.generateJwtToken(email);
-    return { accessToken, user };
+    const token = this.generateJwtToken(email);
+    return {token};
   }
 
   async checkIfEmailExist(email: string): Promise<boolean> {

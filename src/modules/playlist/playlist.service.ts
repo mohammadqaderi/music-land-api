@@ -67,13 +67,16 @@ export class PlaylistService {
     return await playlist.save();
   }
 
-  async removeTrackFromPlaylist(playlistId: number, trackId: number): Promise<void>{
+  async removeTrackFromPlaylist(playlistId: number, trackId: number): Promise<Playlist>{
     const playlist = await this.getPlaylistById(playlistId);
     for (let i = 0; i < playlist.tracks.length; i++) {
       if(playlist.tracks[i].id === trackId){
         await this.trackService.deleteTrack(trackId);
+        playlist.tracks.splice(i, 1);
+        break;
       }
     }
+    return await playlist.save();
   }
   async createPlaylistTrack(song: Song, music: Music, playlistId: number) {
     const playlist = await this.getPlaylistById(playlistId);
